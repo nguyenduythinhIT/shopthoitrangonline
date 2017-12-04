@@ -94,18 +94,7 @@ $_SESSION['page']="admin/";
 		$nsx=new NHASANXUAT();
 		?>
 		<div>
-			Loại:<br>
-			<div class="add">
-				<form action="../module/loai.php" method="post">
-					<table>
-						<tr><td colspan=2>Thêm Loại:</td></tr>
-						<tr><td>Mã:</td><td><input type="text" name="ten" /></td></tr>
-						<tr><td>Tên:</td><td><input type="text" name="ten" /></td></tr>
-						<tr><td>Giới tính</td><td><input type="radio" name="gt" value=1 checked />Nam<input type="radio" name="gt" value=0 />Nữ</td></tr>
-						<tr><td></td><td><input type="submit" name="sm" value="Thêm"/><input type="reset" value="Đóng" style="width:100px;height:27px;" /></td></tr>
-					</table>
-				</form>
-			</div>
+			<p>Loại:</p><br>
 			<?php $list=$loai->getAll();
 			table($list,"loai");
 			?>

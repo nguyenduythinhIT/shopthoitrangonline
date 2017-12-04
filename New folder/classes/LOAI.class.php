@@ -40,8 +40,8 @@ class LOAI extends DB
 	}
 	function xoa($v)
 	{
-		$arr = array("$v");
-		$sql ="delete from LOAI where ma = ?";
-		return $this->query($sql, $arr);	
+		$arr = array($v);
+		$sql ="delete from LOAI where ma=?";
+		return $this->query($sql,$arr);	
 	}
 }

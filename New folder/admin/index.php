@@ -30,7 +30,7 @@ $_SESSION['page']="admin";
 
 <div id="head">
 	<div class="top">
-		<div id="logo"><a href="index.php">LOGO</a></div>
+		<div id="logo"><a href="../index.php">LOGO</a></div>
 		<div id="search">
 			<form action="../module/xulytimkiem.php">
 				<input type="search" name="search" placeholder="Tìm kiếm" />
