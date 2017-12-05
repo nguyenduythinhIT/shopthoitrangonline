@@ -1,10 +1,9 @@
 <?php 
 session_start();
-include_once "../config/config.php";
-include_once "../module/functions.php";
+include_once "config/config.php";include_once "module/functions.php";
 function loadClass($c)
 {
-	include "../classes/$c.class.php";	
+	include "classes/$c.class.php";	
 }
 spl_autoload_register("loadClass");
 if(!isset($_SESSION['ten']))
@@ -13,9 +12,7 @@ if(!isset($_SESSION['ten']))
 	$_SESSION['giohang']=array();
 	$_SESSION['trangthai']=false;
 }
-$_SESSION['page']="admin/";
-
-
+$_SESSION['page']="index.php";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/index.dwt.php" codeOutsideHTMLIsLocked="false" -->
@@ -24,9 +21,9 @@ $_SESSION['page']="admin/";
 <!-- InstanceBeginEditable name="doctitle" -->
 <title>Shop thời trang online</title>
 <!-- InstanceEndEditable -->
-<link rel='stylesheet' href="../css/styles.css"/>
-<script src="../js/jquery-3.2.1.min.js"></script>
-<script src="../js/main.js"></script>
+<link rel='stylesheet' href="css/styles.css"/>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/main.js"></script>
 <!-- InstanceBeginEditable name="head" -->
 <!-- InstanceEndEditable -->
 </head>	
@@ -35,19 +32,19 @@ $_SESSION['page']="admin/";
 
 <div id="head">
 	<div class="top">
-		<div id="logo"><a href="../index.php">LOGO</a></div>
+		<div id="logo"><a href="index.php">LOGO</a></div>
 		<div id="search">
-			<form action="../module/xulytimkiem.php">
+			<form action="timkiem.php">
 				<input type="search" name="search" placeholder="Tìm kiếm" />
 				<input type="submit"value="Tìm kiếm" />
 			</form>
 		</div>
 		<div id="login"><?php 
 		if($_SESSION['ten']==" ")
-		{ echo "<a href='../dangnhap.php'>Đăng nhập</a>"; }
+		{ echo "<a href='dangnhap.php'>Đăng nhập</a>"; }
 		else
 		{
-			echo "<a href='../dangxuat.php'>Đăng xuất</a>";
+			echo "<a href='dangxuat.php'>Đăng xuất</a>";
 		}
 		?></div>
 		<div id="setting"><?php 
@@ -55,18 +52,18 @@ $_SESSION['page']="admin/";
 		{ }
 		else
 		{
-			if($_SESSION['trangthai']==false) echo "<a href='../thongtin.php'>Thông tin</a>";
-			else echo "<a href='index.php'>Quản lý</a>";
+			if($_SESSION['trangthai']==false) echo "<a href='thongtin.php'>Thông tin</a>";
+			else echo "<a href='admin/'>Quản lý</a>";
 		}
 		?></div>
 		<br style="clear:both">
 	</div>
 	<div class="bottom">
-		<a href="../danhmuc.php?page=new" class="sub-menu">New</a>
-		<a href="../danhmuc.php?page=hot" class="sub-menu">Hot</a>
-		<a href="../danhmuc.php?page=nam" class="sub-menu">Đồ Nam</a>
-		<a href="../danhmuc.php?page=nu" class="sub-menu">Đồ Nữ</a>
-		<a href="../giohang.php" class="sub-menu">Giỏ hàng</a>
+		<a href="danhmuc.php?page=new" class="sub-menu">New</a>
+		<a href="danhmuc.php?page=hot" class="sub-menu">Hot</a>
+		<a href="danhmuc.php?page=nam" class="sub-menu">Đồ Nam</a>
+		<a href="danhmuc.php?page=nu" class="sub-menu">Đồ Nữ</a>
+		<a href="giohang.php" class="sub-menu">Giỏ hàng</a>
 		
 	</div>
 </div>
@@ -75,22 +72,21 @@ $_SESSION['page']="admin/";
 <br style="clear:both"/>
 <div id="cont">
 <!-- InstanceBeginEditable name="EditRegion3" -->
-<div id="backend">
-	<p class="title">BACKEND</p>
-    <div class="left">
-    	<div><a href="index.php">Thông tin</a></div>
-    	<div><a href="danhmuc.php">QL Danh mục</a></div>
-        <div style="background:#3a5257;"><a href="khachhang.php">QL Khách hàng</a></div>
-        <div><a href="hoadon.php">QL Hoá đơn</a></div>
-        <div><a href="khuyenmai.php">QL Khuyến mãi</a></div>
-    </div>
-    <div class="right">
-    	<div>
-		<p>Khách hàng</p>
-        </div>
-    </div>
+<?php 
+	$list="[1,2,3,4,5,6,7,8,9,0]";
+	//$sp=new SANPHAM();
+?>
+
+<div id="index">
+	<div class="top">
+	<p>Thông tin sản phẩm</p><br style="clear:both"/>
+	<?php 
+		print_r($_GET);
+	?>
+	<br style="clear:both"/>
+	</div>
+    <br style="clear:both"/>
 </div>
-<br style="clear:both"/>
 <!-- InstanceEndEditable -->
 </div>
 <br style="clear:both"/>

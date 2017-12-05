@@ -21,7 +21,7 @@ class LOAI extends DB
 		/*$arr = array("$ten%");
 		$sql ="select * from sach where tensach like ? ";
 		*/
-		$arr = array(":T"=> "%$ten%");
+		$arr = array(":T"=> $ten);
 		$sql ="select * from LOAI where ma like :T ";
 		
 		return $this->query($sql, $arr);	

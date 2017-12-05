@@ -16,24 +16,46 @@ class SANPHAM extends DB
 		
 		return $this->query($sql, $arr);	
 	}
+	function timloai($ten)
+	{
+		/*$arr = array("%$ten%");
+		$sql ="select * from sach where tensach like ? ";
+		*/
+		$arr = array(":T"=> $ten);
+		$sql ="select * from SANPHAM where loai like :T ";
+		
+		return $this->query($sql, $arr);	
+	}
+	function timnsx($ten)
+	{
+		/*$arr = array("%$ten%");
+		$sql ="select * from sach where tensach like ? ";
+		*/
+		$arr = array(":T"=> $ten);
+		$sql ="select * from SANPHAM where nsx like :T ";
+		
+		return $this->query($sql, $arr);	
+	}
+
 	function timma($ten)
 	{
 		/*$arr = array("$ten%");
 		$sql ="select * from sach where tensach like ? ";
 		*/
-		$arr = array(":T"=> "%$ten%");
+		$arr = array(":T"=> $ten);
 		$sql ="select * from SANPHAM where ma like :T ";
 		
 		return $this->query($sql, $arr);	
 	}
-	function them($arr)
+	function them($v1,$v2,$v3,$v4,$v5,$v6,$v7,$v8,$v9)
 	{
-		$sql ="insert into SANPHAM values(?,?,?,?,?,?,?,?) ";
+		$arr=array($v1,$v2,$v3,$v4,$v5,$v6,$v7,$v8,$v9);
+		$sql ="insert into SANPHAM values(?,?,?,?,?,?,?,?,?) ";
 		return $this->query($sql, $arr);
 	}
-	function sua($v1,$v2)
+	function sua($v1,$v2,$v3,$v4,$v5,$v6,$v7,$v8)
 	{
-		$arr = array("$v2","$v1");
+		$arr=array($v2,$v3,$v4,$v5,$v6,$v7,$v8,$v1);
 		$sql ="update from SANPHAM set ten=? where ma=?";
 		return $this->query($sql, $arr);
 	}

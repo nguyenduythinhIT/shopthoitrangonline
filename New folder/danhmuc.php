@@ -1,9 +1,10 @@
 <?php 
 session_start();
 include_once "config/config.php";
+include_once "module/functions.php";
 function loadClass($c)
 {
-	include "../classes/$c.class.php";	
+	include "classes/$c.class.php";	
 }
 spl_autoload_register("loadClass");
 if(!isset($_SESSION['ten']))
@@ -34,7 +35,7 @@ $_SESSION['page']="index.php";
 	<div class="top">
 		<div id="logo"><a href="index.php">LOGO</a></div>
 		<div id="search">
-			<form action="module/xulytimkiem.php">
+			<form action="timkiem.php">
 				<input type="search" name="search" placeholder="Tìm kiếm" />
 				<input type="submit"value="Tìm kiếm" />
 			</form>
@@ -72,7 +73,84 @@ $_SESSION['page']="index.php";
 <br style="clear:both"/>
 <div id="cont">
 <!-- InstanceBeginEditable name="EditRegion3" -->
-
+<?php 
+	if($_GET['page']=='new')
+	{
+?>
+<div id="index">
+	<div class="top">
+	<p>NEW</p>
+	<?php 
+	$sp=new SANPHAM();
+	$ds=$sp->getAll();
+	for($i=count($ds)-1;$i>=0;$i--)
+		showitem($ds[$i]);
+	?>
+	</div>
+</div>
+<?php 
+	}
+	else if($_GET['page']=='hot')
+	{
+?>
+<div id="index">
+	<div class="top">
+	<p>HOT</p>
+	<?php 
+	$sp=new SANPHAM();
+	$ds=$sp->getAll();
+	foreach($ds as $v)
+		showitem($v);
+	?>
+	</div>
+</div>
+<?php 
+	}
+	else if($_GET['page']=='nam')
+	{
+?>
+<div id="index">
+	<div class="top">
+	<p>NAM</p>
+	<?php 
+	$sp=new SANPHAM();
+	$ds=$sp->getAll();
+	foreach($ds as $v)
+		{
+			$loai=new LOAI();
+			$l=$loai->timma($v['loai']);
+			if($l[0]['gioitinh']==1)
+			{
+				showitem($v);
+			}
+		}
+	?>
+	</div>
+</div>
+<?php 
+	}
+	else if($_GET['page']=='nu')
+	{
+?>
+<div id="index">
+	<div class="top">
+	<p>NỮ</p>
+	<?php 
+	$sp=new SANPHAM();
+	$ds=$sp->getAll();
+	foreach($ds as $v)
+	{
+		$loai=new LOAI();
+			$l=$loai->timma($v['loai']);
+			if($l[0]['gioitinh']==0)
+			{
+				showitem($v);
+			}
+	}
+	?>
+	</div>
+</div>
+<?php } ?>
 <!-- InstanceEndEditable -->
 </div>
 <br style="clear:both"/>

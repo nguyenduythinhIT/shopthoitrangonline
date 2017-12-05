@@ -1,9 +1,9 @@
 <?php 
 session_start();
-include_once "config/config.php";
+include_once "config/config.php";include_once "module/functions.php";
 function loadClass($c)
 {
-	include "../classes/$c.class.php";	
+	include "classes/$c.class.php";	
 }
 spl_autoload_register("loadClass");
 if(!isset($_SESSION['ten']))
@@ -34,7 +34,7 @@ $_SESSION['page']="index.php";
 	<div class="top">
 		<div id="logo"><a href="index.php">LOGO</a></div>
 		<div id="search">
-			<form action="module/xulytimkiem.php">
+			<form action="timkiem.php">
 				<input type="search" name="search" placeholder="Tìm kiếm" />
 				<input type="submit"value="Tìm kiếm" />
 			</form>
@@ -78,16 +78,48 @@ $_SESSION['page']="index.php";
 ?>
 
 <div id="index">
-	<div class="top"></div>
+	<div class="top">
+	<p>MỚI NHẬP</p><br style="clear:both"/>
+	<?php 
+		$sp=new SANPHAM();
+		$ds=$sp->getAll();
+		$i=count($ds)-10;
+		if($i<0) 
+		{
+			$i=0;
+			foreach($ds as $v)
+			showitem($v);
+		}
+		else if($i>0)
+		{
+			for($i;$i<$i+10;$i++)
+			showitem($ds[$i]);
+		}
+	?>
+	<br style="clear:both"/>
+	</div>
     <div class="bot">
     	<div class="left">
         	<p>BÁN NHIỀU NHẤT</p>
-        	<div id="scroll">
-            
-            </div>
+			<br style="clear:both"/>
+            <?php 
+			$sp=new SANPHAM();
+			$ds=$sp->getAll();
+			$i=count($ds)-10;
+			if($i<0) $i=0;
+			foreach($ds as $v)
+			showitem_ngang($v);
+			?>
+			<br style="clear:both"/>
         </div>
         <div class="right">
-
+		<p>Các Sản Phẩm Hiện Đang Bán</p>
+		<?php 
+		$sp=new SANPHAM();
+		$ds=$sp->getAll();
+		foreach($ds as $v)
+		showitem($v);
+	?>
         </div>
         <br style="clear:both"/>
     </div>
