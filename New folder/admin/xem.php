@@ -66,15 +66,35 @@ $ds=$mau->timma($_GET['ma']);
 }
 else if($_GET['p']=='kichthuoc')
 {
+$kichthuoc=new KICHTHUOC();
+$ds=$kichthuoc->timma($_GET['ma']);
 ?>
-
+<p>Thông tin</p>
+<form action = "../module/mau.php">
+<table>
+	<tr><th>Mã</th><td><input type='text' name='ma' value='<?php echo $ds[0]['ma']; ?>' readonly></td></tr>
+	<tr><th>Tên</th><td><input type='text' name='ten' value='<?php echo $ds[0]['ten']; ?>'></td></tr>
+	<tr><td></td><td><input type='submit' name='sm' value='Sửa'></td></tr>
+</table>
+</form>
 <?php
 }
 else if($_GET['p']=='nhasanxuat')
 {
+$nsx=new NHASANXUAT();
+$ds=$nsx->timma($_GET['ma']);
 ?>
-
-<?php
+<p>Thông tin</p>
+<form action = "../module/mau.php">
+<table>
+	<tr><th>Mã</th><td><input type='text' name='ma' value='<?php echo $ds[0]['ma']; ?>' readonly></td></tr>
+	<tr><th>Tên</th><td><input type='text' name='ten' value='<?php echo $ds[0]['ten']; ?>'></td></tr>
+	<tr><td></td><td><input type='submit' name='sm' value='Sửa'></td></tr>
+</table>
+</form>
+<p>DS SẢN PHẨM</p>
+<?php	
+table_sp($sp->timnsx($_GET['ma']),"nsx=".$_GET['ma']);
 }
 ?>
 </div>

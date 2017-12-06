@@ -40,7 +40,7 @@ else if($sm=="Thêm")
 				{}
 			else
 			{	$temp = $_FILES["hinh"]["tmp_name"][$i];
-				$name =$ma."$i";
+				$name =$ma."_".$i;
 				if (!move_uploaded_file($temp, "../image/upload/sp/".$name.".png"))
 					{echo "lỗi";}
 				
@@ -59,7 +59,7 @@ else if($sm=="Xoá")
 	{
 	$n=$ex[0]['hinh'];
 	for($i=0;$i<$n;$i++)
-	{unlink("../image/upload/sp/$ma$i.png");}
+	{unlink("../image/upload/sp/".$ma."_".$i.".png");}
 	$sp->xoa($ma);
 	}
 	header("Location:../admin/xem.php?p=loai&ma=L001");

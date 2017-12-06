@@ -29,7 +29,15 @@ $_SESSION['page']="index.php";
 </head>	
 
 <body>
-
+<?php
+	echo "<script>";
+	if(isset($_GET['message'])) 
+	{
+		$t=$_GET['message'];
+		echo "alert('".$t."')";
+	}
+	echo "</script>";
+?>
 <div id="head">
 	<div class="top">
 		<div id="logo"><a href="index.php">LOGO</a></div>
@@ -130,4 +138,6 @@ $_SESSION['page']="index.php";
 <br style="clear:both"/>
 <div id="foot"></div>
 </body>
-<!-- InstanceEnd --></html>
+<!-- InstanceEnd -->
+
+</html>

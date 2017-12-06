@@ -93,4 +93,10 @@ function showitem_ngang($ds)
 	</div>
 	<?php
 }
+function tangma($v)
+{	
+	$t= substr($v,2)+1;
+	$v=substr($v,0,2).$t;
+	return $v;
+}
 ?>
