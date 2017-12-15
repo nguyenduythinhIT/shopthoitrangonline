@@ -34,13 +34,13 @@ class KICHTHUOC extends DB
 	}
 	function sua($v1,$v2)
 	{
-		$arr = array("$v1","$v2");
-		$sql ="update KICHTHUOC set ma = ?, ten = ?";
+		$arr = array("$v2","$v1");
+		$sql ="update KICHTHUOC set ten = ? where ma= ?";
 		return $this->query($sql, $arr);	
 	}
 	function xoa($v)
 	{
-		$arr = array("$v");
+		$arr = array($v);
 		$sql ="delete from KICHTHUOC where ma = ?";
 		return $this->query($sql, $arr);	
 	}

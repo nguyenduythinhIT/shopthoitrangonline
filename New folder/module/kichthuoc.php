@@ -12,22 +12,20 @@ $kichthuoc=new KICHTHUOC();
 $sm=postIndex('sm');
 $ma=postIndex('ma');
 $ten=postIndex('ten');
-
-if($sm=="") header("Location:../");
+if(isset($_GET['ma']))	$kichthuoc->xoa($_GET['ma']);
+if(!$_SESSION['trangthai']) header("Location:../");
 else if($sm=="Thêm") 
 {
 	if($ma!="" && $ten!="")
-		$kichthuoc->them($ma,$ten,$gt);
-	?><script>window.close();</script> <?php
+		$kichthuoc->them($ma,$ten);
 }
-else if($sm=="Xoá") 
-{
+else if($sm=="Xoá"){
 	$kichthuoc->xoa($ma);
-	header("Location:../admin/danhmuc.php");
 }
-else if($sm=="Sửa") 
+else if($sm=="Cập nhật") 
 {
-	
-	header("Location:../admin/danhmuc.php");
+	$kichthuoc->sua($ma,$ten);
 }
+print_r($_POST);
+	header("Location:../admin/danhmuc.php");
 ?>

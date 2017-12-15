@@ -5,98 +5,64 @@ function postIndex($v)
 	return "";
 }
 
-function table($l,$name)
+function item($v)
 {
-	if($l != array())
+	echo "<div class='item'>";
+	echo "<img src='img/upload/sp/".$v['ma']."_0.png' width=150 />";
+	echo "<p>".$v['ten']."</p>";
+	echo "<p>".$v['giaban']."VND</p>";
+	echo "<div><a href='chitiet.php?ma=$v[ma]'>XEM</a></div>";
+	echo "</div>";
+}
+
+function mahoa($v)
+{
+	return sha1(md5($v));
+}
+function dm_table($ds,$name)
+{
+	echo "<table cellpadding=0 cellspacing=0 id='dm_$name'>";
+	echo "<tr><th>Mã</th><th>Tên</th><th><a href='them.php?p=$name'><button>Thêm</button></a></th></tr>";
+	foreach($ds as $k=>$v)
 	{
-		$i=2;
-		echo "<table cellpadding=0 cellspacing=0>";
-		echo "<tr>";
-		foreach($l[0] as $k=>$v)
-			echo "<th>".$k."</th>";
-		echo "<th><a href='them.php?p=$name' target='_blank'><button>Thêm</button></a></th>";
+		echo "<tr><td>$v[ma]</td><td>$v[ten]</td>";
+		echo "<td>";
+		echo "<a href='xem.php?p=$name&ma=$v[ma]'><button>Xem</button></a>";
+		echo "<a href='../module/$name.php?ma=$v[ma]'><button>Xoá</button></a>";
+		echo "</td>";
 		echo "</tr>";
-		foreach($l as $k=>$v)
-		{
-			echo "<tr>";$i++;
-			foreach($v as $value)
-			{
-				echo "<td>".$value."</td>";
-			}
-			echo "<td><a href=\"xem.php?p=$name&ma=".$v['ma']."\" target=\"_blank\"><input type='submit' name='sm' value='Xem'/></a>";
-			?>
-			<form action='../module/<?php echo $name;?>.php' method='post'>
-				<div  style="overflow:hidden;width:0;height:0" ><input type='text' name='ma' value="<?php echo $v['ma']; ?>"></div>
-				<input type='submit' name='sm' value='Xoá'/>
-				</form></td><?php
-			echo "</tr>";
-		}
-		
-		echo "</table>";
 	}
-	else {echo "<table  cellpadding=0 cellspacing=0><tr><th>Chưa có</th>";
-	echo "<th><a href='them.php?p=$name' target='_blank'><button>Thêm</button></a></th>";
-	echo "</tr></table>";}
+	echo "</table>";
 }
-function table_sp($ds,$vs)
+function xem_table($ds)
 {
-	if($ds!=array())
-	{	
-		?><table cellspacing=0 cellpadding=1 border=1><?php
-		echo "<tr>";
-		foreach($ds[0] as $k => $v)
-		{
-			echo "<th>".$k."</th>";
-		}
-		echo "<th><a href='them.php?p=sp&$vs' target='_blank'><button style=\"width:200px;height:30px;\">Thêm</button></a></th>";
-		foreach($ds as $k => $v)
-		{
-			echo "<tr>";
-			foreach($v as $value) {echo "<td>".$value."</td>";}
-			echo "<td><a href=\"xem.php?p=sp&$vs\" target=\"_blank\"><button style=\"width:100px;height:30px;float:left;\">Xem</button></a>";
-			?>
-			<form action='../module/sanpham.php' method='post'>
-				<div  style="overflow:hidden;width:0;height:0" ><input type='text' name='ma' value="<?php echo $v['ma']; ?>" ></div>
-				<input type='submit' name='sm' value='Xoá' style="width:100px;height:30pxfloat:left;"/>
-				</form></td>
-			<?php
-			echo "</tr>";
-		}
-		?></table><?php
+	echo "<table cellpadding=0 cellspacing=0 id='dm_sp' style='min-width:400px;width:65%'>";
+	echo "<tr><th>Mã</th><th>Tên</th><th><a href='them.php?p=sp'><button>Thêm</button></a></th></tr>";
+	foreach($ds as $k=>$v)
+	{
+		echo "<tr><td>$v[ma]</td><td>$v[ten]</td>";
+		echo "<td>";
+		echo "<a href='xem.php?p=sp&ma=$v[ma]'><button>Xem</button></a>";
+		echo "<a href='../module/sanpham.php?ma=$v[ma]'><button>Xoá</button></a>";
+		echo "</td>";
+		echo "</tr>";
 	}
-	
-	else {echo "<table ><tr><th>Chưa có</th>";
-	echo "<th><a href='them.php?p=sp&$vs' target='_blank'><button style=\"width:200px;height:30px;\">Thêm</button></a></th>";
-	echo "</tr></table>";}
-
-}
-function showitem($ds)
-{
-	?>
-	<div class="item">
-		<img src="image/upload/sp/<?php echo $ds['ma']; ?>0.png" width='200' height='200' />
-		<p><?php echo $ds['ten'];echo "(".$ds['ma'].")" ?></p>
-		<p><?php echo "Giá:".$ds['giaban']."VND";?></p>
-		<div><a href="chitietsp.php?ma=<?php echo $ds['ma']; ?>" target="_blank">Xem</a></div>
-	</div>
-	<?php
-
-}
-function showitem_ngang($ds)
-{
-	?>
-	<div class="item_ngang">
-		<img src="image/upload/sp/<?php echo $ds['ma']; ?>0.png" width='80' height='80' />
-		<div><p><?php echo $ds['ten'];echo "(".$ds['ma'].")" ?></p></div>
-		<div><p><?php echo "Giá:".$ds['giaban']."VND";?></p></div>
-		<div>Xem</div>
-	</div>
-	<?php
+	echo "</table>";
 }
 function tangma($v)
-{	
-	$t= substr($v,2)+1;
-	$v=substr($v,0,2).$t;
-	return $v;
+{
+	$v1=substr($v,0,2);
+	$v2=substr($v,2);
+	$v2=$v2+1;
+	$v=$v1.$v2;
+	echo $v;
+}
+function tangma_($v)
+{
+	$v1=substr($v,0,2);
+	$v2=substr($v,2);
+	$v2=$v2+1;
+	
+	return $v1.$v2;;
 }
 ?>

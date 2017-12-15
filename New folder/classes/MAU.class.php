@@ -34,7 +34,7 @@
 	function sua($v1,$v2)
 	{
 		$arr = array("$v2","$v1");
-		$sql ="update from MAU set ten=? where ma=?";
+		$sql ="update MAU set ten=? where ma=?";
 		return $this->query($sql, $arr);
 	}
 	function xoa($v)

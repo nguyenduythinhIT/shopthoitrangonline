@@ -13,21 +13,21 @@ $sm=postIndex('sm');
 $ma=postIndex('ma');
 $ten=postIndex('ten');
 $gt=postIndex('gt');
-if($sm=="") header("Location:../");
+
+if(!$_SESSION['trangthai']) header("Location:../");
+if(isset($_GET['ma'])) $loai->xoa($_GET['ma']);
 else if($sm=="Thêm") 
 {
+	print_r($_POST);
 	if($ma!="" && $ten!="" && $gt!="")
 		$loai->them($ma,$ten,$gt);
-	?><script>window.close();</script> <?php
+		
 }
-else if($sm=="Xoá") 
+else if($sm=="Cập nhật") 
 {
-	$loai->xoa($ma);
-	header("Location:../admin/danhmuc.php");
+
+	$loai->sua($ma,$ten,$gt);
 }
-else if($sm=="Sửa") 
-{
-	
-	header("Location:../admin/danhmuc.php");
-}
+
+header("Location:../admin/danhmuc.php");
 ?>

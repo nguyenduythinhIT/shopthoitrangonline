@@ -12,6 +12,12 @@ class ADMIN extends DB
 		$sql ="select * from ADMIN where taikhoan like ? ";
 		return $this->query($sql, $arr);	
 	}
+	function timmk($ten)
+	{
+		$arr = array("$ten");
+		$sql ="select * from ADMIN where matkhau1 like ? ";
+		return $this->query($sql, $arr);	
+	}
 	function them($tk,$mk)
 	{
 		$arr = array("$tk","$mk");
@@ -31,3 +37,4 @@ class ADMIN extends DB
 		return $this->query($sql, $arr);	
 	}
 }
+?>

@@ -12,22 +12,22 @@ $mau=new MAU();
 $sm=postIndex('sm');
 $ma=postIndex('ma');
 $ten=postIndex('ten');
-
+if(isset($_GET['ma'])) {
+	$mau->xoa($_GET['ma']);
+	}
 if($sm=="") header("Location:../");
 else if($sm=="Thêm") 
 {
 	if($ma!="" && $ten!="")
-		$mau->them($ma,$ten,$gt);
-	?><script>window.close();</script> <?php
+		$mau->them($ma,$ten);
 }
 else if($sm=="Xoá") 
 {
-	$mau->xoa($ma);
-	header("Location:../admin/danhmuc.php");
+$mau->xoa($ma);
 }
-else if($sm=="Sửa") 
+else if($sm=="Cập nhật") 
 {
-	
-	header("Location:../admin/danhmuc.php");
+	$mau->sua($ma,$ten);
 }
+header("Location:../admin/danhmuc.php");
 ?>

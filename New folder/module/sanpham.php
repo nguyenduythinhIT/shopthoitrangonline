@@ -1,6 +1,6 @@
 ﻿<?php 
 echo "<pre>";
-print_r($_FILES);
+print_r($_POST);
 session_start();
 include_once "functions.php";
 include_once "../config/config.php";
@@ -17,13 +17,24 @@ $ten=postIndex('ten');
 $gia=postIndex('gia');
 $loai=postIndex('loai');
 $nsx=postIndex('nsx');
-$soluong=postIndex('soluong');
-$trangthai=postIndex('trangthai');
+$soluong=0;
+ $trangthai=postIndex('trangthai');
 if($trangthai=="") $trangthai=1;
 $mota=postIndex('mota');
 if($mota=="") $mota="chưa có mô tả";
 $arrImg = array("image/png", "image/jpeg", "image/bmp");
-if($sm=="") header("Location:../");
+if(!$_SESSION['trangthai']) header("Location:../");
+if(isset($_GET['ma'])) {
+	$ex=$sp->timma($_GET['ma']);
+	if($ex!=array())
+	{
+	$n=$ex[0]['hinh'];
+	for($i=0;$i<$n;$i++)
+	{unlink("../img/upload/sp/".$_GET['ma']."_".$i.".png");}
+	$sp->xoa($_GET['ma']);
+	}
+	header("Location:../admin/danhmuc.php");
+}
 else if($sm=="Thêm") 
 {
 	if($ma!="" && $ten!=""){
@@ -41,16 +52,16 @@ else if($sm=="Thêm")
 			else
 			{	$temp = $_FILES["hinh"]["tmp_name"][$i];
 				$name =$ma."_".$i;
-				if (!move_uploaded_file($temp, "../image/upload/sp/".$name.".png"))
+				if (!move_uploaded_file($temp, "../img/upload/sp/".$name.".png"))
 					{echo "lỗi";}
 				
 			}
 		}
 	}
-
+	echo $loai;
 	$sp->them($ma,$ten,$gia,$loai,$nsx,$soluong,$sohinh,$trangthai,$mota);
 	}
-	?><script>window.close();</script> <?php 
+	header("Location:../admin/xem.php?p=loai&ma=$loai");
 }
 else if($sm=="Xoá") 
 {
@@ -59,14 +70,14 @@ else if($sm=="Xoá")
 	{
 	$n=$ex[0]['hinh'];
 	for($i=0;$i<$n;$i++)
-	{unlink("../image/upload/sp/".$ma."_".$i.".png");}
+	{unlink("../img/upload/sp/".$ma."_".$i.".png");}
 	$sp->xoa($ma);
 	}
-	header("Location:../admin/xem.php?p=loai&ma=L001");
+	header("Location:../admin/xem.php?p=loai&ma=$loai");
 }
 else if($sm=="Sửa") 
 {
 	
-	header("Location:../admin/xem.php?p=loai&ma=L001");
+	header("Location:../admin/xem.php?p=loai&ma=$loai");
 }
 ?>

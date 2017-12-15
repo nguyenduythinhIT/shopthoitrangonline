@@ -12,6 +12,12 @@ class TAIKHOAN extends DB
 		$sql ="select * from TAIKHOAN where taikhoan like ? ";
 		return $this->query($sql, $arr);	
 	}
+	function timmk($ten)
+	{
+		$arr = array("$ten");
+		$sql ="select * from TAIKHOAN where matkhau1 like ? ";
+		return $this->query($sql, $arr);	
+	}	
 	function them($tk,$mk,$ma)
 	{
 		$arr = array($tk,$mk,$ma);
@@ -21,7 +27,7 @@ class TAIKHOAN extends DB
 	function capnhat($v1,$v2,$v3)
 	{
 		$arr = array($v2,$v3,$v1);
-		$sql ="update TAIKHOAN(matkhau1,matkhau2) set matkhau1=?";
+		$sql ="update TAIKHOAN set matkhau1=? , matkhau2=? where taikhoan=?";
 		return $this->query($sql, $arr);	
 	}
 	function xoa($tk)

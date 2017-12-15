@@ -35,7 +35,7 @@ class NHASANXUAT extends DB
 	function sua($v1,$v2)
 	{
 		$arr = array("$v2","$v1");
-		$sql ="update from NHASANXUAT set ten=? where ma=?";
+		$sql ="update NHASANXUAT set ten=? where ma=?";
 		return $this->query($sql, $arr);
 	}
 	function xoa($v)

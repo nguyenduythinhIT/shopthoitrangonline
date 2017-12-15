@@ -35,7 +35,7 @@ class LOAI extends DB
 	function sua($v1,$v2,$v3)
 	{
 		$arr = array("$v2","$v3","$v1");
-		$sql ="update from LOAI set ten=?, gioitinh=? where ma=?";
+		$sql ="update LOAI set ten = ?, gioitinh = ? where ma = ?";
 		return $this->query($sql, $arr);
 	}
 	function xoa($v)

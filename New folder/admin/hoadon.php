@@ -1,4 +1,29 @@
-<?php 
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Shop thời trang online</title>
+
+<link rel='stylesheet' href="../css/style.css"/>
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../js/main.js"></script>
+
+</head>	
+
+<body> 
+<div id="head">
+	<div class="top">
+		<a href="index.php">ShopThờiTrang</a>
+		<form action="../index.php" method="get">
+			<input type="search" name="s" placeholder="Tìm kiếm">
+			<input type="submit" value="Tìm" >
+		</form>
+	</div>
+</div>
+<div id="content" >
+	<div class="left">
+<?php
 session_start();
 include_once "../config/config.php";
 include_once "../module/functions.php";
@@ -12,88 +37,52 @@ if(!isset($_SESSION['ten']))
 	$_SESSION['ten']=" ";
 	$_SESSION['giohang']=array();
 	$_SESSION['trangthai']=false;
-}
-$_SESSION['page']="admin/";
-
-
+}?>
+<?php 
+	include "menu_backend.php";
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/index.dwt.php" codeOutsideHTMLIsLocked="false" -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- InstanceBeginEditable name="doctitle" -->
-<title>Shop thời trang online</title>
-<!-- InstanceEndEditable -->
-<link rel='stylesheet' href="../css/styles.css"/>
-<script src="../js/jquery-3.2.1.min.js"></script>
-<script src="../js/main.js"></script>
-<!-- InstanceBeginEditable name="head" -->
-<!-- InstanceEndEditable -->
-</head>	
+	</div>
+	<div class="right">
+		<div style="width:100%;height:55px"></div>
+		<div style="width:200px;float:left;"></div>
+		<div id="main">
+<style>
+table{width:95%;margin:10px auto;}
+table,td,th{border:1px solid #2f3539}
+th{background:#2f3539;color:#ccc;height:25px;line-height:25px; overflow:hidden;}
+th:first-child{width:15%}
+th:last-child{width:150px;}
+th a{display:block;text-decoration:none;}
+button{height:25px;width:50%}
+</style>
+<script>
 
-<body>
+function loadsp($v)
+{
+		$("#hd").load("showhd.php?p="+$v);
+}
+function clickbtn($v)
+{
+	if($v==0) loadsp("");
+	else loadsp($v);
+}
 
-<div id="head">
-	<div class="top">
-		<div id="logo"><a href="../index.php">LOGO</a></div>
-		<div id="search">
-			<form action="../module/xulytimkiem.php">
-				<input type="search" name="search" placeholder="Tìm kiếm" />
-				<input type="submit"value="Tìm kiếm" />
-			</form>
+$( document ).ready(function() {
+loadsp("");
+});
+</script>
+<p style='background:#2f3539;width:90%;height:30px;line-height:30px;text-align:center;color:white;margin:0 auto'>DANH MỤC HOÁ ĐƠN</p>
+	<button style='width:150px;float:left;margin-top:5px;height:30px;margin-left:5%' onclick="clickbtn(0)">Tất cả</button>
+	<button style='width:150px;float:left;margin-top:5px;height:30px' onclick="clickbtn(1)">Chưa giao hàng</button>
+	<button style='width:150px;float:left;margin-top:5px;height:30px' onclick="clickbtn(2)">Đã giao hàng</button>
+	<br style="clear:both">
+	<div id="hd" style='width:90%;min-height:300px;margin:0 auto'>
+	</div>
 		</div>
-		<div id="login"><?php 
-		if($_SESSION['ten']==" ")
-		{ echo "<a href='../dangnhap.php'>Đăng nhập</a>"; }
-		else
-		{
-			echo "<a href='../dangxuat.php'>Đăng xuất</a>";
-		}
-		?></div>
-		<div id="setting"><?php 
-		if($_SESSION['ten']==" ")
-		{ }
-		else
-		{
-			if($_SESSION['trangthai']==false) echo "<a href='../thongtin.php'>Thông tin</a>";
-			else echo "<a href='index.php'>Quản lý</a>";
-		}
-		?></div>
-		<br style="clear:both">
-	</div>
-	<div class="bottom">
-		<a href="../danhmuc.php?page=new" class="sub-menu">New</a>
-		<a href="../danhmuc.php?page=hot" class="sub-menu">Hot</a>
-		<a href="../danhmuc.php?page=nam" class="sub-menu">Đồ Nam</a>
-		<a href="../danhmuc.php?page=nu" class="sub-menu">Đồ Nữ</a>
-		<a href="../giohang.php" class="sub-menu">Giỏ hàng</a>
-		
+		<div id="foot">
+		</div>
 	</div>
 </div>
-<div id="space"></div>
-<div id="backtotop"><p>TOP</p></div>
-<br style="clear:both"/>
-<div id="cont">
-<!-- InstanceBeginEditable name="EditRegion3" -->
-<div id="backend">
-	<p class="title">BACKEND</p>
-    <div class="left">
-    	<div><a href="index.php">Thông tin</a></div>
-    	<div><a href="danhmuc.php">QL Danh mục</a></div>
-        <div><a href="khachhang.php">QL Khách hàng</a></div>
-        <div style="background:#3a5257;"><a href="hoadon.php">QL Hoá đơn</a></div>
-        <div><a href="khuyenmai.php">QL Khuyến mãi</a></div>
-    </div>
-    <div class="right">
-    	<div>
-		<p>Hoá đơn</p>
-        </div>
-    </div>
-</div>
-<br style="clear:both"/>
-<!-- InstanceEndEditable -->
-</div>
-<br style="clear:both"/>
-<div id="foot"></div>
+
 </body>
-<!-- InstanceEnd --></html>
+</html>

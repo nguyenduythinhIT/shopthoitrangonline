@@ -13,7 +13,8 @@ $sm=postIndex('sm');
 $ma=postIndex('ma');
 $ten=postIndex('ten');
 $arrImg = array("image/png", "image/jpeg", "image/bmp");
-if($sm=="") header("Location:../");
+if(isset($_GET['ma']))	$nsx->xoa($_GET['ma']);
+if(!isset($_SESSION['trangthai'])) header("Location:../");
 else if($sm=="Thêm") 
 {
 	if($ma!="" && $ten!=""){
@@ -28,7 +29,7 @@ else if($sm=="Thêm")
 		else
 		{	$temp = $_FILES["hinh"]["tmp_name"];
 			$name =$ma;
-			if (!move_uploaded_file($temp, "../image/upload/nsx/".$name.".png"))
+			if (!move_uploaded_file($temp, "../img/upload/nsx/".$name.".png"))
 				{echo "lỗi";}
 			
 		}
@@ -41,11 +42,10 @@ else if($sm=="Thêm")
 else if($sm=="Xoá") 
 {
 	$nsx->xoa($ma);
-	header("Location:../admin/danhmuc.php");
 }
-else if($sm=="Sửa") 
+else if($sm=="Cập nhật") 
 {
-	
-	header("Location:../admin/danhmuc.php");
+	$nsx->sua($ma,$ten);
 }
+	header("Location:../admin/danhmuc.php");
 ?>
